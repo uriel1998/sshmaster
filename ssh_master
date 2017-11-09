@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#input needs to be user, host to connect to, hostname
+
+User="$1"
+Host="$2"
+HostName="$3"
+
+
+if tmux ls | grep -q -e "SSHes"; then
+    #session already exists
+    ExistingWindows=$(tmux ls | grep -e "SSHes"| awk -F ": " '{print $2}' | awk '{print $1}')
+    tmux new-window -t SSHes:$ExistingWindows -n "$HostName"
+else
+    #session needs created
+    tmux -2 new-session -d -s SSHes
+    #because tmux counts from 0
+    ExistingWindows=$((ExistingWindows - 1))
+    tmux rename-window -t SSHes:$ExistingWindows "$HostName"
+fi
+
+tmux select-window -t SSHes:$ExistingWindows
+tmux send-keys "ssh $User@$Host" C-m
+
+numterms=$(ps aux | grep "tmux -2 attach-session -t SSHes" | grep -c -v "grep")
+
+if [ $numterms -gt 0 ];then
+    echo "see existing term"
+else
+    tmux -2 attach-session -t SSHes
+fi
