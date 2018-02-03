@@ -20,12 +20,15 @@ else
 fi
 
 tmux select-window -t SSHes:$ExistingWindows
-tmux send-keys "ssh $User@$Host" C-m
+tmux -t SSHes:$ExistingWindows send-keys "ssh $User@$Host" C-m
 
 numterms=$(ps aux | grep "tmux -2 attach-session -t SSHes" | grep -c -v "grep")
 
 if [ $numterms -gt 0 ];then
     echo "see existing term"
 else
+    currwindow=$(echo $WINDOWID)
+    xseticon -id "$currwindow" /home/steven/.icons/Faenza/apps/48/gnome-network-properties.png
+    wmctrl -i -r "$currwindow" -T "SSHes" 
     tmux -2 attach-session -t SSHes
 fi
