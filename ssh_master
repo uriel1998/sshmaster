@@ -20,7 +20,7 @@ else
 fi
 
 tmux select-window -t SSHes:$ExistingWindows
-tmux -t SSHes:$ExistingWindows send-keys "ssh $User@$Host" C-m
+tmux send-keys -t SSHes:$ExistingWindows "ssh $User@$Host" C-m
 
 numterms=$(ps aux | grep "tmux -2 attach-session -t SSHes" | grep -c -v "grep")
 
