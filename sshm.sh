@@ -2,7 +2,20 @@
 
 set -euo pipefail
 
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+resolve_script_dir() {
+    local source="${BASH_SOURCE[0]}"
+    local dir=""
+
+    while [ -L "$source" ]; do
+        dir=$(cd -P "$(dirname "$source")" && pwd)
+        source=$(readlink "$source")
+        [[ "$source" != /* ]] && source="$dir/$source"
+    done
+
+    cd -P "$(dirname "$source")" && pwd
+}
+
+SCRIPT_DIR=$(resolve_script_dir)
 CONFIG_FILE="${SSHM_CONFIG:-$SCRIPT_DIR/sshm.config}"
 ICON_DIR="${SSHM_ICON_DIR:-$SCRIPT_DIR/share/icons}"
 
