@@ -23,7 +23,7 @@ FGColor 15
 Host drift
 Host drift.example.net
 Host 10.10.1.40
-Icon /opt/sshm/icons/drift.png
+Icon drift
 BGColor #203040
 FGColor White
 ########################################################################

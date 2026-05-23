@@ -8,6 +8,7 @@ config/default_example.cfg
 mpdq.ini
 mpdc.ini
 local/
+sshm.config
 share/
 
 # Editor and OS noise
