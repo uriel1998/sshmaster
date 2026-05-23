@@ -1,10 +1,43 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -euo pipefail
 
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 CONFIG_FILE="${SSHM_CONFIG:-$SCRIPT_DIR/sshm.config}"
 ICON_DIR="${SSHM_ICON_DIR:-$SCRIPT_DIR/share/icons}"
+
+show_help() {
+    cat <<EOF
+Usage:
+  $(basename "$0") [ssh arguments...]
+  $(basename "$0") --help
+
+Behavior:
+  sshm accepts the same arguments as ssh.
+  If the destination host matches a Host entry in:
+    $CONFIG_FILE
+  then sshm launches ssh inside xterm and decorates that xterm using the
+  first Icon, BGColor, and FGColor values in the matching block.
+  If there is no matching block, sshm execs plain ssh.
+
+Config:
+  Blocks are separated by comment lines beginning with #.
+  Supported keys inside a block:
+    Host      Host alias or hostname to match.
+    Icon      Icon filename stem, filename, or absolute path.
+    BGColor   xterm color name, #RRGGBB, or 0-255 xterm color index.
+    FGColor   xterm color name, #RRGGBB, or 0-255 xterm color index.
+
+Environment:
+  SSHM_CONFIG    Override the config file path.
+  SSHM_ICON_DIR  Override the default icon directory.
+
+Defaults:
+  Config file:   $CONFIG_FILE
+  Icon dir:      $ICON_DIR
+  Terminal type: xterm-256color
+EOF
+}
 
 trim() {
     local value="$1"
@@ -217,6 +250,13 @@ main() {
     local destination host_match config_data icon="" bg="" fg="" icon_path=""
     local key value
     local -a xterm_args
+
+    case "${1:-}" in
+        --help|help)
+            show_help
+            return 0
+            ;;
+    esac
 
     if ! destination=$(extract_destination "$@"); then
         exec ssh "$@"
