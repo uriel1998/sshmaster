@@ -1,0 +1,35 @@
+########################################################################
+Host atlas
+Host atlas.example.net
+Host 10.10.1.10
+Icon atlas
+BGColor 52
+FGColor White
+########################################################################
+Host borealis
+Host borealis.example.net
+Host 10.10.1.20
+Icon borealis
+BGColor MidnightBlue
+FGColor White
+########################################################################
+Host cinder
+Host cinder.example.net
+Host bastion-cinder
+Icon cinder
+BGColor 22
+FGColor 15
+########################################################################
+Host drift
+Host drift.example.net
+Host 10.10.1.40
+Icon /opt/sshm/icons/drift.png
+BGColor #203040
+FGColor White
+########################################################################
+Host ember
+Host ember.example.net
+Host 10.10.1.50
+Icon ember
+BGColor 58
+FGColor 255
