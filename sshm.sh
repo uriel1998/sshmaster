@@ -24,6 +24,7 @@ Config:
   Blocks are separated by comment lines beginning with #.
   Supported keys inside a block:
     Host      Host alias or hostname to match.
+    HostName  Alternate hostname or address to match.
     Icon      Icon filename stem, filename, or absolute path.
     BGColor   xterm color name, #RRGGBB, or 0-255 xterm color index.
     FGColor   xterm color name, #RRGGBB, or 0-255 xterm color index.
@@ -191,6 +192,11 @@ config_for_host() {
 
         case "$key" in
             Host)
+                if [ "$value" = "$target" ]; then
+                    matched=1
+                fi
+                ;;
+            HostName)
                 if [ "$value" = "$target" ]; then
                     matched=1
                 fi
