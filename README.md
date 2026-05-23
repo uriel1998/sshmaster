@@ -35,6 +35,8 @@ Examples:
 - `sshm.sh` accepts the same argument forms that `ssh` does.
 - The first non-option destination is used to determine whether the host is in
   `sshm.config`.
+- A config block matches when that destination equals either a `Host` or
+  `HostName` value in the block.
 - If the matched host appears in a config block, `sshm.sh` launches `xterm`
   and runs `ssh` inside it with the original argument list unchanged.
 - If the host is not in `sshm.config`, `sshm.sh` executes plain `ssh`.
@@ -48,6 +50,7 @@ Blocks are separated by comment lines beginning with `#`.
 Supported keys:
 
 - `Host`: host alias or hostname to match. You can repeat this key within a block.
+- `HostName`: alternate hostname or address to match.
 - `Icon`: icon filename stem, icon filename, or absolute path.
 - `BGColor`: xterm color name, `#RRGGBB`, or a `0-255` xterm palette index.
 - `FGColor`: xterm color name, `#RRGGBB`, or a `0-255` xterm palette index.
