@@ -28,7 +28,7 @@ Usage:
 Behavior:
   sshm accepts the same arguments as ssh.
   If the destination host matches a Host entry in:
-    $CONFIG_FILE
+    <script-dir>/sshm.config
   then sshm launches ssh inside xterm and decorates that xterm using the
   first Icon, BGColor, and FGColor values in the matching block.
   If there is no matching block, sshm execs plain ssh.
@@ -47,8 +47,8 @@ Environment:
   SSHM_ICON_DIR  Override the default icon directory.
 
 Defaults:
-  Config file:   $CONFIG_FILE
-  Icon dir:      $ICON_DIR
+  Config file:   <script-dir>/sshm.config
+  Icon dir:      <script-dir>/share/icons
   Terminal type: xterm-256color
 EOF
 }

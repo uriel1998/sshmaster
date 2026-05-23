@@ -44,7 +44,7 @@ Examples:
 
 ## Config Format
 
-The default config file is [sshm.config](/home/steven/Documents/programming/sshmaster/sshm.config:1).
+The default config file is `sshm.config` in the script directory.
 Blocks are separated by comment lines beginning with `#`.
 
 Supported keys:
@@ -70,7 +70,7 @@ FGColor White
 
 ## Icons
 
-By default, icons are loaded from [share/icons](/home/steven/Documents/programming/sshmaster/share/icons).
+By default, icons are loaded from `share/icons` in the script directory.
 
 Icon resolution order:
 
