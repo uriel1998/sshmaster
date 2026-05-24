@@ -1,5 +1,12 @@
 # sshmaster
 
+This completely replaces what I was trying to do almost a decade ago.  
+
+Back then, I was mostly trying to use tmux as a TUI, but that doesn't fit my workflow now. 
+
+This does.  I use xterm for terminals with ssh, but often have multiple windows open. This will color them and change the icon on the taskbar, etc. It's nothing fancy, but it's better than what *was* here, so if you find it, you're at least looking at something useful.
+
+
 `sshm.sh` is a thin wrapper around `ssh`.
 
 It accepts normal `ssh` arguments, checks the destination host against
